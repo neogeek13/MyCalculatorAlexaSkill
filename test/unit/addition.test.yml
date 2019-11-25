@@ -1,0 +1,24 @@
+---
+configuration:
+  locale: en-US
+
+
+---
+- test: Launch request, no further interaction and AMAZON.StopIntent.
+- LaunchRequest: # LaunchRequest is not an utterance but a request type and reserved word
+    - response.outputSpeech.ssml: /welcome to my calculator.*/i # Regular expression
+    - response.reprompt.outputSpeech.ssml: /welcome to my calculator.*/i # Regular expression
+    - response.shouldEndSession: false
+- AMAZON.StopIntent: Goodbye
+
+---
+- test: Launch request, perform one addition operation
+- LaunchRequest: # LaunchRequest is not an utterance but a request type and reserved word
+    - response.outputSpeech.ssml: /welcome to my calculator.*/i # Regular expression
+    - response.reprompt.outputSpeech.ssml: /welcome to my calculator.*/i # Regular expression
+    - response.shouldEndSession: false
+- AddIntent firstNumber=3 secondNumber=17:
+  - response.outputSpeech.ssml: The result of 3 plus 17 is 20.
+- AMAZON.StopIntent: Goodbye
+
+
